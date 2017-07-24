@@ -24,11 +24,13 @@ public class MainActivity extends AppCompatActivity
         implements CameraBridgeViewBase.CvCameraViewListener2 {
 
     private static final String TAG = "opencv";
-    private CameraBridgeViewBase mOpenCvCameraView;
+    private CameraBridgeViewBase mOpenCvCameraView;     //카메라를찍는화면의뷰를가져옴
     private Mat matInput;
     private Mat matResult;
 
+    //내가만든함수로넘어감
     public native void ConvertRGBtoGray(long matAddrInput, long matAddrResult);
+    public native void imshow(long matAddr);
 
 
     static {
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity
                 case LoaderCallbackInterface.SUCCESS:
                 {
                     mOpenCvCameraView.enableView();
+                    //카메라를 붙이는 부분인듯
                 } break;
                 default:
                 {
@@ -130,9 +133,10 @@ public class MainActivity extends AppCompatActivity
         matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
 
         ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
-
+        //imshow(matInput.getNativeObjAddr());
         return matResult;
     }
+
 
 
 
