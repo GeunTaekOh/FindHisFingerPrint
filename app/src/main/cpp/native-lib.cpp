@@ -48,7 +48,7 @@ extern "C" {
 //        cvCreateTrackbar("HighV", "찾을 색범위 설정", &HighV, 255);
 
         Mat &img_binary = *(Mat *)matAddrResult;
-        /////위부분이상하수있음
+        /////위부분이상할수있음
         Mat &matInput = *(Mat *)matAddrInput;
         Mat &matResult = *(Mat *)matAddrResult;
 
@@ -58,6 +58,9 @@ extern "C" {
         cvtColor(matInput, matResult, CV_RGB2HSV);
 
         inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
+        //inRange 함수는 그 범위안에 들어가게되면 0으로 만들어주고 나머지는 1로 만들어 흑백사진을 만든다.
+        //이거 주석처리하면 오류뜸
+
 //
 //
 //        //morphological opening 작은 점들을 제거
@@ -95,8 +98,12 @@ extern "C" {
         int height  = stats.at<int>(idx, CC_STAT_HEIGHT);
 
 
-        rectangle( matInput, Point(left,top), Point(left+width,top+height),
-                   Scalar(0,0,255),1 );
+        rectangle(  matResult, Point(left,top), Point(left+width,top+height),
+                   Scalar(255,0,0),1 );
+
+        //matInput이아니라 matResult에 그려야하나
+        //차례대로, 영상 Mat, 좌표점1, 좌표점2, 색상, 두께(-1이면 color 색상으로 채운 사각형을 그림), 타입, 시프트연산을 뜻한다.
+
 
 
     }
