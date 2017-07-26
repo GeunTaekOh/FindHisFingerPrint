@@ -19,12 +19,11 @@ using namespace std;
 
 
 extern "C" {
-    JNIEXPORT void JNICALL
+    JNIEXPORT int JNICALL
     Java_com_taek_1aaa_opencv_MainActivity_ConvertRGBtoGray(JNIEnv *env, jobject instance,
                                                         jlong matAddrInput, jlong matAddrResult) {
 
         //namedWindow("찾을 색범위 설정", CV_WINDOW_AUTOSIZE);
-        int num =0;
 
         //트랙바에서 사용되는 변수 초기화
         int LowH = 170;
@@ -35,6 +34,18 @@ extern "C" {
 
         int LowV = 0;
         int HighV = 255;
+        Mat binary;
+
+//        int LowH = 0;
+//        int HighH = 180;
+//
+//        int LowS = 0;
+//        int HighS = 100;
+//
+//        int LowV = 0;
+//        int HighV = 100;
+//http://babytiger.tistory.com/entry/opencv%EC%97%90%EC%84%9C-HSV%EC%9D%98-%EA%B0%81-%EC%B1%84%EB%84%90-%EB%B2%94%EC%9C%84
+
 
 
         //트랙바 생성
@@ -47,7 +58,8 @@ extern "C" {
 //        cvCreateTrackbar("LowV", "찾을 색범위 설정", &LowV, 255); //Value (0 - 255)
 //        cvCreateTrackbar("HighV", "찾을 색범위 설정", &HighV, 255);
 
-        Mat &img_binary = *(Mat *)matAddrResult;
+        //Mat &img_binary = binary;         //이렇게하면 hsv  화면
+        Mat &img_binary = *(Mat *)matAddrResult;        //이렇게 하면 흑백화면
         /////위부분이상할수있음
         Mat &matInput = *(Mat *)matAddrInput;
         Mat &matResult = *(Mat *)matAddrResult;
@@ -63,8 +75,8 @@ extern "C" {
         // void cvInRangeS(const CvArr* input, CvScalar lower, CvScalar upper, CvArr* output)
 
 
-//
-//
+
+
 //        //morphological opening 작은 점들을 제거
 //        erode(img_binary, img_binary, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
 //        dilate( img_binary, img_binary, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
@@ -98,32 +110,17 @@ extern "C" {
         int top  = stats.at<int>(idx, CC_STAT_TOP);
         int width = stats.at<int>(idx, CC_STAT_WIDTH);
         int height  = stats.at<int>(idx, CC_STAT_HEIGHT);
-
-        if(num==10){
-            
-
-        }else {
-
-            rectangle(matResult, Point(left, top), Point(left + width, top + height),
-                      Scalar(255, 0, 0), 1);
-            num++;
-
-        }
-
-
+        
+        rectangle(img_binary, Point(left, top), Point(left + width, top + height), Scalar(255, 0, 0), 3);
+            //나중에 빨간색말고 다른색 인식할때 선 색상 바꿔야할듯
         //matInput이아니라 matResult에 그려야하나
         //차례대로, 영상 Mat, 좌표점1, 좌표점2, 색상, 두께(-1이면 color 색상으로 채운 사각형을 그림), 타입, 시프트연산을 뜻한다.
 
-
+            if(height * width < 9000 || height * width > 2000000)
+                return 0;
+            else
+                return 1;
+        //return height * width;
 
     }
-//    JNIEXPORT void JNICALL
-//    Java_com_taek_1aaa_opencv_MainActivity_imshow(JNIEnv *env, jobject instance, jlong matAddr) {
-//
-//        cvShowImage("test", &matAddr);
-//
-//    }
-
-
-
 }

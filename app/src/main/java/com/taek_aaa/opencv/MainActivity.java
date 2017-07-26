@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity
     private Mat matResult;
 
     //내가만든함수로넘어감
-    public native void ConvertRGBtoGray(long matAddrInput, long matAddrResult);
-    public native void imshow(long matAddr);
+    public native int ConvertRGBtoGray(long matAddrInput, long matAddrResult);
+   // public native void imshow(long matAddr);
 
 
     static {
@@ -132,8 +132,14 @@ public class MainActivity extends AppCompatActivity
         if ( matResult != null ) matResult.release();
         matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
 
-        ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr());
-        //imshow(matInput.getNativeObjAddr());
+
+        if(ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr())==1)
+            Log.e("test","인식함");
+        else
+            Log.e("test","인식안함");
+        //Log.e("test",""+ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()));
+
+
         return matResult;
     }
 
