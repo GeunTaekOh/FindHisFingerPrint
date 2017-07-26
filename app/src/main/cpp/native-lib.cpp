@@ -110,7 +110,7 @@ extern "C" {
         int top  = stats.at<int>(idx, CC_STAT_TOP);
         int width = stats.at<int>(idx, CC_STAT_WIDTH);
         int height  = stats.at<int>(idx, CC_STAT_HEIGHT);
-        
+
         rectangle(img_binary, Point(left, top), Point(left + width, top + height), Scalar(255, 0, 0), 3);
             //나중에 빨간색말고 다른색 인식할때 선 색상 바꿔야할듯
         //matInput이아니라 matResult에 그려야하나
