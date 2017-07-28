@@ -23,6 +23,7 @@ public class PageFragment extends Fragment {
     private int numOfPage = 7;
     private int index=0;
     static private boolean isFirst = true;  //이변수를 static 빼버리면 부드럽게 넘어가는데 소리가 엉망임
+    private boolean isSound;
 
 
 
@@ -86,9 +87,13 @@ public class PageFragment extends Fragment {
         videoView = ((VideoView) layout.findViewById(R.id.videoView));
 
         if (isFirst) {
-            playVideo();
+            playVideo(true);    //첫 영상이 소리가있느냐 여부
             isFirst=false;
+        }else{
+            playVideo(false);
         }
+
+
 
         return layout;
     }
@@ -99,7 +104,7 @@ public class PageFragment extends Fragment {
         Log.e("index","index : "+index);
         if (videoView != null) {
             if (isVisibleToUser) {
-                playVideo();
+                playVideo(true);
             }
             if (!isVisibleToUser) {
                 videoView.pause();
@@ -108,12 +113,16 @@ public class PageFragment extends Fragment {
 
     }
 
-    private void playVideo() {
+    private void playVideo(boolean isVolume) {
+        isSound=isVolume;
         videoView.setVideoURI(video);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setLooping(true);
+                if(!isSound)
+                    mp.setVolume(0,0);
+
                 videoView.start();
             }
         });
