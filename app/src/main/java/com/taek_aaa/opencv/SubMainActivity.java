@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class SubMainActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             // 해당하는 page의 Fragment를 생성합니다.
+            Log.e("test", "subMain : "+position);
             Fragment frag = fragments.get(position);
             if (frag != null) {
                 return frag;
