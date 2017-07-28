@@ -5,16 +5,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 import android.widget.Toast;
+
+import me.kaelaela.verticalviewpager.VerticalViewPager;
+import me.kaelaela.verticalviewpager.transforms.DefaultTransformer;
+
 
 /**
  * Created by taek_aaa on 2017. 7. 26..
  */
 
 public class SubMainActivity extends FragmentActivity {
-    private ViewPager mViewPager;
+    private VerticalViewPager mViewPager;
+
+
     private PagerAdapter mPagerAdapter;
     SparseArray<Fragment> fragments = new SparseArray<Fragment>();
     private long lastTimeBackPressed;
@@ -24,9 +29,11 @@ public class SubMainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_main);
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = (VerticalViewPager)findViewById(R.id.pager);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setPageTransformer(false, new DefaultTransformer());
+
     }
 
     private class PagerAdapter extends FragmentStatePagerAdapter {

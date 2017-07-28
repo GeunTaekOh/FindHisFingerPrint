@@ -20,6 +20,7 @@ public class PageFragment extends Fragment {
     private int mPageNumber;
     private Uri video;
     private static String packageName;
+    private int numOfPage = 7;
 
     VideoView videoView;
 
@@ -28,6 +29,7 @@ public class PageFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt("page", pageNumber);
         fragment.setArguments(args);
+
         packageName = pn;
         return fragment;
     }
