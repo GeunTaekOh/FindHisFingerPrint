@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    //매 프레임마다 실행이 됨
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
 
