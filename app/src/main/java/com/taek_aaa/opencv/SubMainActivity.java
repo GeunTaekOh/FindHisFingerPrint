@@ -34,6 +34,7 @@ public class SubMainActivity extends FragmentActivity {
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setPageTransformer(false, new DefaultTransformer());
+        mViewPager.setOffscreenPageLimit(5);    //미리 5개의 페이지를 로드함
 
     }
 
