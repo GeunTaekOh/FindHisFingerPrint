@@ -20,19 +20,15 @@ public class PageFragment extends Fragment {
     private int mPageNumber;
     private Uri video;
     private static String packageName;
-    private int numOfPage = 7;
     private int index=0;
     static private boolean isFirst = true;  //이변수를 static 빼버리면 부드럽게 넘어가는데 소리가 엉망임
     private boolean isSound;
-
-
-
     VideoView videoView;
 
     public static PageFragment create(int pageNumber, String pn) {
         PageFragment fragment = new PageFragment();
         Bundle args = new Bundle();
-        args.putInt("page", pageNumber);
+        args.putInt("page", pageNumber);    //페이지 넘버를 intent로 넘겨줌
         fragment.setArguments(args);
         packageName = pn;
         return fragment;
@@ -41,7 +37,7 @@ public class PageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt("page");
+        mPageNumber = getArguments().getInt("page");    //intent 로 page number를 받음
     }
 
     @Override
@@ -49,8 +45,6 @@ public class PageFragment extends Fragment {
                              Bundle savedInstanceState) {
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.fragment_page, container, false);
 
-        Log.e("test", "test : " + mPageNumber);
-        String videoName;
         switch (mPageNumber) {
             case 0:
                 video = Uri.parse("android.resource://" + packageName + "/" + R.raw.sample01_sound);
@@ -87,13 +81,11 @@ public class PageFragment extends Fragment {
         videoView = ((VideoView) layout.findViewById(R.id.videoView));
 
         if (isFirst) {
-            playVideo(true);    //첫 영상이 소리가있느냐 여부
+            playVideo(true);    //첫 영상이 소리가있느냐 여부   //이건 하드코딩 첫페이지는 소리가 있는 영상이므로 이렇게 작업을 함
             isFirst=false;
         }else{
-            playVideo(false);
+            playVideo(false);       //첫 영상이 아닌 경우는 일단 소리 출력 없이 재생을 시킴
         }
-
-
 
         return layout;
     }
@@ -103,10 +95,10 @@ public class PageFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         Log.e("index","index : "+index);
         if (videoView != null) {
-            if (isVisibleToUser) {
+            if (isVisibleToUser) {      //현재 보이는 화면이면 소리 출력후 재생
                 playVideo(true);
             }
-            if (!isVisibleToUser) {
+            if (!isVisibleToUser) {     //보이지 않으면 일시정지
                 videoView.pause();
             }
         }
@@ -120,9 +112,8 @@ public class PageFragment extends Fragment {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setLooping(true);
-                if(!isSound)
+                if(!isSound)            //이함수에 들어온 인자값이 false 인 경우 소리재생을 하지 않음
                     mp.setVolume(0,0);
-
                 videoView.start();
             }
         });
