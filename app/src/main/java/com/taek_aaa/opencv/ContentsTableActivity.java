@@ -11,41 +11,36 @@ import android.widget.Toast;
  * Created by taek_aaa on 2017. 8. 4..
  */
 
-public class ContentsTableActivity extends AppCompatActivity{
+public class ContentsTableActivity extends AppCompatActivity {
 
-    public static int contentsTableIndex =0;
+    public static int contentsTableIndex = 0;
     private Intent intent;
     private long lastTimeBackPressed;           //뒤로가기 버튼을 2번 누르면 종료하기 위해 담은 변수
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contentstable);
-        Button btn1 = (Button)findViewById(R.id.first_btn);
 
+        Button btn1 = (Button) findViewById(R.id.first_btn);
         intent = new Intent(this, SubMainActivity.class);
-
-
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(intent);
-                contentsTableIndex=0;
+                contentsTableIndex = 0;
             }
         });
 
-        Button btn2 = (Button)findViewById(R.id.second_btn);
+        Button btn2 = (Button) findViewById(R.id.second_btn);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(intent);
-                contentsTableIndex=1;
+                contentsTableIndex = 1;
             }
         });
-
-
     }
 
     @Override
@@ -59,8 +54,4 @@ public class ContentsTableActivity extends AppCompatActivity{
         Toast.makeText(ContentsTableActivity.this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show();
         lastTimeBackPressed = System.currentTimeMillis();
     }
-
-
-
-
 }

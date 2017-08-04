@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity
         System.loadLibrary("native-lib");
     }
 
-
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -56,7 +55,6 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +65,6 @@ public class MainActivity extends AppCompatActivity
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //퍼미션 상태 확인
             if (!hasPermissions(PERMISSIONS)) {
@@ -76,7 +73,6 @@ public class MainActivity extends AppCompatActivity
                 requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
         }
-
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
@@ -142,19 +138,15 @@ public class MainActivity extends AppCompatActivity
             num = 0;
         Log.e("test", "인식안함");
         //Log.e("test",""+ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()));
-
         return matResult;
     }
-
 
     //여기서부턴 퍼미션 관련 메소드
     static final int PERMISSIONS_REQUEST_CODE = 1000;
     String[] PERMISSIONS = {"android.permission.CAMERA"};
 
-
     private boolean hasPermissions(String[] permissions) {
         int result;
-
         //스트링 배열에 있는 퍼미션들의 허가 상태 여부 확인
         for (String perms : permissions) {
 
@@ -165,7 +157,6 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         }
-
         //모든 퍼미션이 허가되었음
         return true;
     }
@@ -210,6 +201,4 @@ public class MainActivity extends AppCompatActivity
         });
         builder.create().show();
     }
-
-
 }

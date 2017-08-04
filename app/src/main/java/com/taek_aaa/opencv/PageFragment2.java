@@ -20,7 +20,7 @@ public class PageFragment2 extends Fragment {
     private int mPageNumber;
     private Uri video;
     private static String packageName;
-    private int index=0;
+    private int index = 0;
     static private boolean isFirst = true;  //이변수를 static 빼버리면 부드럽게 넘어가는데 소리가 엉망임
     private boolean isSound;
     VideoView videoView;
@@ -48,15 +48,15 @@ public class PageFragment2 extends Fragment {
         switch (mPageNumber) {
             case 0:
                 video = Uri.parse("android.resource://" + packageName + "/" + R.raw.test_mpeg);
-                index=0;
+                index = 0;
                 break;
             case 1:
                 video = Uri.parse("android.resource://" + packageName + "/" + R.raw.sample02);
-                index=1;
+                index = 1;
                 break;
             case 2:
                 video = Uri.parse("android.resource://" + packageName + "/" + R.raw.sample03);
-                index =2;
+                index = 2;
                 break;
 
 
@@ -67,8 +67,8 @@ public class PageFragment2 extends Fragment {
 
         if (isFirst) {
             playVideo(true);    //첫 영상이 소리가있느냐 여부   //이건 하드코딩 첫페이지는 소리가 있는 영상이므로 이렇게 작업을 함
-            isFirst=false;
-        }else{
+            isFirst = false;
+        } else {
             playVideo(false);       //첫 영상이 아닌 경우는 일단 소리 출력 없이 재생을 시킴
         }
 
@@ -78,7 +78,7 @@ public class PageFragment2 extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e("index","index : "+index);
+        Log.e("index", "index : " + index);
         if (videoView != null) {
             if (isVisibleToUser) {      //현재 보이는 화면이면 소리 출력후 재생
                 playVideo(true);
@@ -91,14 +91,14 @@ public class PageFragment2 extends Fragment {
     }
 
     private void playVideo(boolean isVolume) {
-        isSound=isVolume;
+        isSound = isVolume;
         videoView.setVideoURI(video);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setLooping(true);
-                if(!isSound)            //이함수에 들어온 인자값이 false 인 경우 소리재생을 하지 않음
-                    mp.setVolume(0,0);
+                if (!isSound)            //이함수에 들어온 인자값이 false 인 경우 소리재생을 하지 않음
+                    mp.setVolume(0, 0);
                 videoView.start();
             }
         });

@@ -21,24 +21,26 @@ extern "C" {
                                                         jlong matAddrInput, jlong matAddrResult) {
 
         //트랙바에서 사용되는 변수 초기화
-        int LowH = 170;
-        int HighH = 179;
-
-        int LowS = 50;
-        int HighS = 255;
-
-        int LowV = 0;
-        int HighV = 255;
-        Mat binary;
-
-//        int LowH = 0;
-//        int HighH = 180;
+//        int LowH = 170;
+//        int HighH = 179;
 //
-//        int LowS = 0;
-//        int HighS = 100;
+//        int LowS = 50;
+//        int HighS = 255;
 //
 //        int LowV = 0;
-//        int HighV = 100;
+//        int HighV = 255;
+        Mat binary;
+
+        int LowH = 0;
+        int HighH = 180;
+
+        int LowS = 0;
+        int HighS = 50;
+
+        int LowV = 80;
+        int HighV = 100;
+                //인식률 떨어지면 gray scale 로 바꿔서 색상값 인식하기
+
 //http://babytiger.tistory.com/entry/opencv%EC%97%90%EC%84%9C-HSV%EC%9D%98-%EA%B0%81-%EC%B1%84%EB%84%90-%EB%B2%94%EC%9C%84
 
         long inputSaveAddr = matAddrInput;
