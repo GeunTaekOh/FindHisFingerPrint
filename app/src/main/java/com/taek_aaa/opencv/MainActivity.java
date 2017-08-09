@@ -134,9 +134,15 @@ public class MainActivity extends AppCompatActivity
             }
             num++;
             Log.e("test", "인식함");
-        } else
-            num = 0;
-        Log.e("test", "인식안함");
+            Log.e("test", "num : "+num);
+        } else {
+            num -= 4;
+            if(num<0)
+                num=0;
+            Log.e("test", "인식안함");
+            Log.e("test", "num : "+num);
+        }
+
         //Log.e("test",""+ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()));
         return matResult;
     }
