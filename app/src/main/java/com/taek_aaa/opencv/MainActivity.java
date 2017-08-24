@@ -125,10 +125,10 @@ public class MainActivity extends AppCompatActivity
 
         if (matResult != null) matResult.release();
         matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
-
+        Log.e("test",""+ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()));
 
         if (ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()) == 1) {
-            if (num > 10) {
+            if (num > 5) {
                 //startActivity(new Intent(this, SubMainActivity.class));
                 startActivity(new Intent(this, ContentsTableActivity.class));
             }
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity
             Log.e("test", "인식함");
             Log.e("test", "num : "+num);
         } else {
-            num -= 4;
+            num -= 1;
             if(num<0)
                 num=0;
             Log.e("test", "인식안함");

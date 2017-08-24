@@ -31,14 +31,14 @@ extern "C" {
 //        int HighV = 255;
         Mat binary;
 
-        int LowH = 0;
-        int HighH = 180;
+        int LowH = 52;
+        int HighH = 72;
 
-        int LowS = 0;
-        int HighS = 50;
+        int LowS = 78;
+        int HighS = 98;
 
-        int LowV = 80;
-        int HighV = 100;
+        int LowV = 74;
+        int HighV = 94;
                 //인식률 떨어지면 gray scale 로 바꿔서 색상값 인식하기
 
 //http://babytiger.tistory.com/entry/opencv%EC%97%90%EC%84%9C-HSV%EC%9D%98-%EA%B0%81-%EC%B1%84%EB%84%90-%EB%B2%94%EC%9C%84
@@ -100,11 +100,20 @@ extern "C" {
         //matInput이아니라 matResult에 그려야하나
         //차례대로, 영상 Mat, 좌표점1, 좌표점2, 색상, 두께(-1이면 color 색상으로 채운 사각형을 그림), 타입, 시프트연산을 뜻한다.
 
-            if(height * width < 9000 || height * width > 2000000)
-                return 0;
-            else
-                return 1;
-        //return height * width;
+//            if(height * width < 9000 || height * width > 2000000)
+//                return 0;
+//            else
+//                return 1;
+//위에꺼는 원래 색상인식할때 사각형의 크기 제한해둔것임
+        //아래거는 이제 특이한색이니까 사각형의 크기를 조금 더 작게해
+
+
+        if(height * width < 1 || height * width > 2000000)
+            return 0;
+        else
+            return 1;
+
+//        return height * width;
 
     }
 }
