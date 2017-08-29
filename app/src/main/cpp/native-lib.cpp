@@ -31,16 +31,25 @@ extern "C" {
 //        int HighV = 255;
         Mat binary;
 
-        int LowH = 52;
-        int HighH = 72;
 
-        int LowS = 78;
-        int HighS = 98;
+        int LowH = 160;
+        int HighH = 202;
 
-        int LowV = 74;
-        int HighV = 94;
+        int LowS = 170;
+        int HighS = 228;
+
+        int LowV = 20;
+        int HighV = 50;
+
+
+        //R 값 먼저 확인하고 G 값 확인 후 B 값 확인함
+        // 지금은inRange 에 matResult 를 넣어놔서 rgb로 값을 인식함
+
+
+
                 //인식률 떨어지면 gray scale 로 바꿔서 색상값 인식하기
-
+        //아래 싸이트 rgb -> hsv 변환
+//http://www.rapidtables.com/convert/color/rgb-to-hsv.htm
 //http://babytiger.tistory.com/entry/opencv%EC%97%90%EC%84%9C-HSV%EC%9D%98-%EA%B0%81-%EC%B1%84%EB%84%90-%EB%B2%94%EC%9C%84
 
         long inputSaveAddr = matAddrInput;
@@ -59,7 +68,7 @@ extern "C" {
         cvtColor(matInput, matTmp, CV_RGB2HSV);
         cvtColor(matTmp, matResult, CV_HSV2RGB);
 
-        inRange(matTmp, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
+        inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
         //inRange 함수는 그 범위안에 들어가게되면 0으로 만들어주고 나머지는 1로 만들어 흑백사진을 만든다.
         //이거 주석처리하면 오류뜸
         // void cvInRangeS(const CvArr* input, CvScalar lower, CvScalar upper, CvArr* output)
@@ -113,7 +122,7 @@ extern "C" {
         else
             return 1;
 
-//        return height * width;
+     //   return height * width;
 
     }
 }

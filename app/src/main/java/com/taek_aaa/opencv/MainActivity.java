@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity
             Log.e("test", "num : "+num);
         }
 
-        //Log.e("test",""+ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()));
         return matResult;
     }
 
