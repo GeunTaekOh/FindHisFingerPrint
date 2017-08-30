@@ -68,6 +68,33 @@ extern "C" {
         cvtColor(matInput, matTmp, CV_RGB2HSV);
         cvtColor(matTmp, matResult, CV_HSV2RGB);
 
+
+        double min, max;
+        CvPoint left_top;
+        IplImage *A = cvLoadImage("My_Desk.jpg", -1); // 책상(A)을 먼저 읽고
+        //A가 내가 위에 카메라로 받은 화면이 되어야함
+
+        IplImage *B = cvLoadImage("Stapler.jpg", -1); // 스테이플러(B)를 읽는다.
+        IplImage* C = cvCreateImage( cvSize( A->width - B->width+1, A->height - B->height+1 ), IPL_DEPTH_32F, 1 ); // 상관계수를 구할 이미지(C)
+
+        cvMatchTemplate(A, B, C, CV_TM_CCOEFF_NORMED); // 상관계수를 구하여 C 에 그린다.
+        cvMinMaxLoc(C, &min, &max, NULL, &left_top); // 상관계수가 최대값을 값는 위치 찾기
+        cvRectangle(A, left_top, cvPoint(left_top.x + B->width, left_top.y + B->height), CV_RGB(255,0,0)); // 찾은 물체에 사격형을 그린다.
+
+        cvWaitKey(0);
+
+        // 모든 이미지 릴리즈
+        cvReleaseImage(&A);
+        cvReleaseImage(&B);
+        cvReleaseImage(&C);
+
+        // 모든 윈도우 제거
+        cvDestroyAllWindows();
+
+
+
+
+
         inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
         //inRange 함수는 그 범위안에 들어가게되면 0으로 만들어주고 나머지는 1로 만들어 흑백사진을 만든다.
         //이거 주석처리하면 오류뜸

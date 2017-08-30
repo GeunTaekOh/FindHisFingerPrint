@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     private Mat matResult;
     private int num = 0;
 
+
     //내가만든함수로넘어감
     public native int ConvertRGBtoGray(long matAddrInput, long matAddrResult);
 
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(0); // front-camera(1),  back-camera(0)
         mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+    // 여기에 이미지 절대경로 넣어보기
+
     }
 
     @Override
