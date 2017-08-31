@@ -1,24 +1,34 @@
 package com.taek_aaa.opencv;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
 import org.opencv.core.Mat;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class MainActivity extends AppCompatActivity
@@ -29,10 +39,12 @@ public class MainActivity extends AppCompatActivity
     private Mat matInput;
     private Mat matResult;
     private int num = 0;
-
+    private String samplePath;
+    private Mat ImageMat = null;
+    private static final int MY_PERMISSION_REQUEST_STORAGE=1;
 
     //내가만든함수로넘어감
-    public native int ConvertRGBtoGray(long matAddrInput, long matAddrResult);
+    public native int ConvertRGBtoGray(long matAddrInput, long matAddrResult, long path);
 
     static {
         System.loadLibrary("opencv_java3");
@@ -56,6 +68,30 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void checkPermission() {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                // Explain to the user why we need to write the permission.
+                Toast.makeText(this, "Read/Write external storage", Toast.LENGTH_SHORT).show();
+            }
+
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSION_REQUEST_STORAGE);
+
+            // MY_PERMISSION_REQUEST_STORAGE is an
+            // app-defined int constant
+
+        } else {
+            // 다음 부분은 항상 허용일 경우에 해당이 됩니다.
+
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +110,39 @@ public class MainActivity extends AppCompatActivity
                 requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
         }
+
+
+
+
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(0); // front-camera(1),  back-camera(0)
         mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
     // 여기에 이미지 절대경로 넣어보기
+        samplePath = "android.resource://" + ""+getPackageName() + "/drawable/sample";
+        //samplePath = "/storage/emulated/0/Download/sample.png";
+        Log.e("test",""+getPackageName());
+
+        InputStream stream = null;
+        Uri uri = Uri.parse(samplePath);
+        if(uri==null || uri.equals("")){
+            Log.e("test","uri null이다..");
+        }
+        try {
+            stream = getContentResolver().openInputStream(uri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
+        bmpFactoryOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+        Bitmap bmp = BitmapFactory.decodeStream(stream, null, bmpFactoryOptions);
+
+        ImageMat= new Mat();
+        Utils.bitmapToMat(bmp, ImageMat);
+
 
     }
 
@@ -128,9 +191,9 @@ public class MainActivity extends AppCompatActivity
 
         if (matResult != null) matResult.release();
         matResult = new Mat(matInput.rows(), matInput.cols(), matInput.type());
-        Log.e("test",""+ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()));
+        Log.e("test","리턴값 : "+ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr(),ImageMat.getNativeObjAddr()));
 
-        if (ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()) == 1) {
+        if (ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr(),ImageMat.getNativeObjAddr()) == 1) {
             if (num > 5) {
                 //startActivity(new Intent(this, SubMainActivity.class));
                 startActivity(new Intent(this, ContentsTableActivity.class));
@@ -184,6 +247,21 @@ public class MainActivity extends AppCompatActivity
 
                     if (!cameraPermissionAccepted)
                         showDialogForPermission("앱을 실행하려면 퍼미션을 허가하셔야합니다.");
+                }
+                break;
+            case MY_PERMISSION_REQUEST_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! do the
+                    // calendar task you need to do.
+
+                } else {
+
+                    Log.d(TAG, "Permission always deny");
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
                 }
                 break;
         }
