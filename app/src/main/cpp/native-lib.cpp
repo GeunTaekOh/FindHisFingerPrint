@@ -33,6 +33,7 @@ extern "C" {
 //        int HighV = 255;
         Mat binary;
         Mat result;
+        Mat empty;
 
         int LowH = 160;
         int HighH = 202;
@@ -50,7 +51,7 @@ extern "C" {
         // 지금은inRange 에 matResult 를 넣어놔서 rgb로 값을 인식함
 
 
-                //인식률 떨어지면 gray scale 로 바꿔서 색상값 인식하기
+        //인식률 떨어지면 gray scale 로 바꿔서 색상값 인식하기
         //아래 싸이트 rgb -> hsv 변환
 //http://www.rapidtables.com/convert/color/rgb-to-hsv.htm
 //http://babytiger.tistory.com/entry/opencv%EC%97%90%EC%84%9C-HSV%EC%9D%98-%EA%B0%81-%EC%B1%84%EB%84%90-%EB%B2%94%EC%9C%84
@@ -63,7 +64,7 @@ extern "C" {
         /////위부분이상할수있음
         Mat &matInput = *(Mat *)matAddrInput;
         Mat &matResult = *(Mat *)matAddrResult;
-        Mat &matTmp = binary;
+        Mat &matTmp = empty;
         Mat &matSamplePathColor = *(Mat *)path;
         Mat &matSamplePath = *(Mat *)path;
 
@@ -108,6 +109,7 @@ extern "C" {
         cvMinMaxLoc(C, &min, &max, NULL, &left_top); // 상관계수가 최대값을 값는 위치 찾기
         cvRectangle(A, left_top, cvPoint(left_top.x + B->width, left_top.y + B->height), CV_RGB(0,0,255)); // 찾은 물체에 사격형을 그린다.
 
+
 //
 //
 //        //라벨링
@@ -148,8 +150,9 @@ extern "C" {
 //            return 0;
 //        else
 //            return 1;
-        return left_top.x;
-     //   return height * width;
+        return min+max;
+        //   return height * width;
+
 
     }
 }

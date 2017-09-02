@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(0); // front-camera(1),  back-camera(0)
         mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-    // 여기에 이미지 절대경로 넣어보기
+        // 여기에 이미지 절대경로 넣어보기
         samplePath = "android.resource://" + ""+getPackageName() + "/drawable/sample";
         //samplePath = "/storage/emulated/0/Download/sample.png";
         Log.e("test",""+getPackageName());
