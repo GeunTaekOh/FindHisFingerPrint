@@ -32,8 +32,7 @@ extern "C" {
 //        int LowV = 0;
 //        int HighV = 255;
         Mat binary;
-        Mat result;
-        Mat empty;
+
 
         int LowH = 160;
         int HighH = 202;
@@ -44,11 +43,10 @@ extern "C" {
         int LowV = 20;
         int HighV = 50;
 
-        double min, max;
-
 
         //R 값 먼저 확인하고 G 값 확인 후 B 값 확인함
         // 지금은inRange 에 matResult 를 넣어놔서 rgb로 값을 인식함
+
 
 
         //인식률 떨어지면 gray scale 로 바꿔서 색상값 인식하기
@@ -64,24 +62,13 @@ extern "C" {
         /////위부분이상할수있음
         Mat &matInput = *(Mat *)matAddrInput;
         Mat &matResult = *(Mat *)matAddrResult;
-        Mat &matTmp = empty;
-        Mat &matSamplePathColor = *(Mat *)path;
-        Mat &matSamplePath = *(Mat *)path;
-
-
+        Mat &matTmp = binary;
 
         //사진을 캡쳐해서 무한루프로 돌리고출력한다음에 그 사이에 색상평균값을계산해주면됨
         //인식하려면 hsv로해야 훨씬인식잘됨
 
-        cvtColor(matInput, matTmp, CV_BGR2GRAY);
-//        matInput = matTmp;    //이거하면오류남.?
-        cvtColor(matTmp, matResult, CV_GRAY2RGB);
-
-//        cvtColor(matSamplePathColor, matSamplePath, CV_BGR2GRAY);
-
-
-        //cvtColor(matTmp, matSamplePath, CV_BGR2GRAY);
-
+        cvtColor(matInput, matTmp, CV_RGB2HSV);
+        cvtColor(matTmp, matResult, CV_HSV2RGB);
 
         inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
         //inRange 함수는 그 범위안에 들어가게되면 0으로 만들어주고 나머지는 1로 만들어 흑백사진을 만든다.
@@ -98,42 +85,28 @@ extern "C" {
 //        erode(img_binary, img_binary, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
 
 
-        CvPoint left_top;
-        IplImage tmpImage = matInput;
-        IplImage *A = &tmpImage;
-        IplImage tmpSample = matSamplePath;
-        IplImage *B = &tmpSample;
-        IplImage* C = cvCreateImage( cvSize( A->width - B->width+1, A->height - B->height+1 ), IPL_DEPTH_32F, 1 ); // 상관계수를 구할 이미지(C)
+        //라벨링
+        Mat img_labels,stats, centroids;
+        int numOfLables = connectedComponentsWithStats(img_binary, img_labels,
+                                                       stats, centroids, 8,CV_32S);
 
-        cvMatchTemplate(A, B, C, CV_TM_CCOEFF_NORMED); // 상관계수를 구하여 C 에 그린다.
-        cvMinMaxLoc(C, &min, &max, NULL, &left_top); // 상관계수가 최대값을 값는 위치 찾기
-        cvRectangle(A, left_top, cvPoint(left_top.x + B->width, left_top.y + B->height), CV_RGB(0,0,255)); // 찾은 물체에 사격형을 그린다.
+        //영역박스 그리기
+        int max = -1, idx=0;
+        for (int j = 1; j < numOfLables; j++) {
+            int area = stats.at<int>(j, CC_STAT_AREA);
+            if ( max < area )
+            {
+                max = area;
+                idx = j;
+            }
+        }
+        ///////테스트겸 지금 일단 액티비티 넘어가는 것은 꺼둠
+        int left = stats.at<int>(idx, CC_STAT_LEFT);
+        int top  = stats.at<int>(idx, CC_STAT_TOP);
+        int width = stats.at<int>(idx, CC_STAT_WIDTH);
+        int height  = stats.at<int>(idx, CC_STAT_HEIGHT);
 
-
-//
-//
-//        //라벨링
-//        Mat img_labels,stats, centroids;
-//        int numOfLables = connectedComponentsWithStats(img_binary, img_labels,
-//                                                       stats, centroids, 8,CV_32S);
-//
-//        //영역박스 그리기
-//        int max = -1, idx=0;
-//        for (int j = 1; j < numOfLables; j++) {
-//            int area = stats.at<int>(j, CC_STAT_AREA);
-//            if ( max < area )
-//            {
-//                max = area;
-//                idx = j;
-//            }
-//        }
-//                ///////테스트겸 지금 일단 액티비티 넘어가는 것은 꺼둠
-//        int left = stats.at<int>(idx, CC_STAT_LEFT);
-//        int top  = stats.at<int>(idx, CC_STAT_TOP);
-//        int width = stats.at<int>(idx, CC_STAT_WIDTH);
-//        int height  = stats.at<int>(idx, CC_STAT_HEIGHT);
-//
-//        rectangle(matResult, Point(left, top), Point(left + width, top + height), Scalar(255, 0, 0), 3);
+        rectangle(matResult, Point(left, top), Point(left + width, top + height), Scalar(255, 0, 0), 3);
         //나중에 빨간색말고 다른색 인식할때 선 색상 바꿔야할듯
         //matInput이아니라 matResult에 그려야하나
         //차례대로, 영상 Mat, 좌표점1, 좌표점2, 색상, 두께(-1이면 color 색상으로 채운 사각형을 그림), 타입, 시프트연산을 뜻한다.
@@ -146,11 +119,11 @@ extern "C" {
         //아래거는 이제 특이한색이니까 사각형의 크기를 조금 더 작게해
 
 
-//        if(height * width < 1 || height * width > 2000000)
-//            return 0;
-//        else
-//            return 1;
-        return min+max;
+        if(height * width < 1 || height * width > 2000000)
+            return 0;
+        else
+            return 1;
+
         //   return height * width;
 
 
