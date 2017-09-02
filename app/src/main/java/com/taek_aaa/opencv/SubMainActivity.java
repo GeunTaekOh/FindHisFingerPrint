@@ -5,10 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
-
-import me.kaelaela.verticalviewpager.VerticalViewPager;
-import me.kaelaela.verticalviewpager.transforms.DefaultTransformer;
 
 import static com.taek_aaa.opencv.ContentsTableActivity.contentsTableIndex;
 
@@ -18,7 +16,7 @@ import static com.taek_aaa.opencv.ContentsTableActivity.contentsTableIndex;
  */
 
 public class SubMainActivity extends FragmentActivity {
-    private VerticalViewPager mViewPager;       //수직으로 넘기는 VerticalViewPager 사용
+    private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
     SparseArray<Fragment> fragments = new SparseArray<Fragment>();
 
@@ -26,11 +24,11 @@ public class SubMainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_main);
-        mViewPager = (VerticalViewPager) findViewById(R.id.pager);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.setPageTransformer(false, new DefaultTransformer());
-        //mViewPager.setOffscreenPageLimit(5);    //미리 5개의 페이지를 로드함
+
+
     }
 
     private class PagerAdapter extends FragmentStatePagerAdapter {
