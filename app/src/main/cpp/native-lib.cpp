@@ -49,6 +49,8 @@ extern "C" {
         cvtColor(matInput, matTmp, CV_RGB2HSV);
         cvtColor(matTmp, matResult, CV_HSV2RGB);
 
+
+
         inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
         //inRange 함수는 그 범위안에 들어가게되면 0으로 만들어주고 나머지는 1로 만들어 흑백사진을 만든다.
 
@@ -74,14 +76,16 @@ extern "C" {
         int width = stats.at<int>(idx, CC_STAT_WIDTH);
         int height  = stats.at<int>(idx, CC_STAT_HEIGHT);
 
-        rectangle(matResult, Point(left, top), Point(left + width, top + height), Scalar(255, 0, 0), 3);
+        if(height * width < 2000000)
+            rectangle(matResult, Point(left, top), Point(left + width, top + height), Scalar(255, 0, 0), 3);
         //차례대로, 영상 Mat, 좌표점1, 좌표점2, 색상, 두께(-1이면 color 색상으로 채운 사각형을 그림), 타입, 시프트연산을 뜻한다.
 
-        if(height * width < 1 || height * width > 2000000)
-            return 0;
-        else
-            return 1;
+//        if(height * width < 1 || height * width > 2000000)
+//            return 0;
+//        else
+//            return 1;
 
+        return 0;
         //   return height * width;
 
 
