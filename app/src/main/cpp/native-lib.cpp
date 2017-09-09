@@ -22,14 +22,25 @@ extern "C" {
         Mat binary;
 
 
-        int LowH = 160;
-        int HighH = 202;
+//        int LowH = 160;
+//        int HighH = 202;
+//
+//        int LowS = 170;
+//        int HighS = 228;
+//
+//        int LowV = 20;
+//        int HighV = 50;
 
-        int LowS = 170;
-        int HighS = 228;
+        int LowH = 24;
+        int HighH = 37;
+        // H 값은 360도로 나타나는대 이걸 opencv 에서는 0~180으로 나타내기 때문에 그 값을 절반 나누어서 입력하기
+        int LowS = 204;
+        int HighS = 220;
 
-        int LowV = 20;
-        int HighV = 50;
+        int LowV = 150;
+        int HighV = 200;
+        // s 와 v 는 0~100까지 값으로 나타내는데 이걸 opencv에서는 0~255 값으로 나타내므로 255 * 0.xxx 한 값을 넣어줘야한다.
+
 
 
         //R 값 먼저 확인하고 G 값 확인 후 B 값 확인함
@@ -51,7 +62,8 @@ extern "C" {
 
 
 
-        inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
+        //inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
+        inRange(matTmp, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
         //inRange 함수는 그 범위안에 들어가게되면 0으로 만들어주고 나머지는 1로 만들어 흑백사진을 만든다.
 
 
