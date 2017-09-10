@@ -35,7 +35,7 @@ public class ContentsTableActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         videoView = (VideoView)findViewById(R.id.contents_table_video);
-        video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.menu_backgroud);
+        video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.menu_background);
         videoView.setVideoURI(video);
         playVideo();
 

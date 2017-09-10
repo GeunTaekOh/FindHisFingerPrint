@@ -43,7 +43,7 @@ public class PageFragment2 extends Fragment {
 
         switch (mPageNumber) {
             case 0:
-                video = Uri.parse("android.resource://" + packageName + "/" + R.raw.test_mpeg);
+                video = Uri.parse("android.resource://" + packageName + "/" + R.raw.eye);
                 break;
             //sub main activity 에 페이지 개수 수정하기
         }
