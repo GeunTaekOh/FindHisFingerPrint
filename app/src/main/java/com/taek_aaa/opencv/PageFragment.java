@@ -19,7 +19,7 @@ public class PageFragment extends Fragment {
     private int mPageNumber;
     private Uri video;
     private static String packageName;
-    VideoView videoView;
+    private VideoView videoView;
 
     public static PageFragment create(int pageNumber, String pn) {
         PageFragment fragment = new PageFragment();

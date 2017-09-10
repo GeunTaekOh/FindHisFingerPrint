@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity
         mOpenCvCameraView.setCameraIndex(0); // front-camera(1),  back-camera(0)
         mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         // 여기에 이미지 절대경로 넣어보기
-
     }
 
     @Override
@@ -94,7 +93,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "onResume :: Internal OpenCV library not found.");
             OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, this, mLoaderCallback);
@@ -106,7 +104,6 @@ public class MainActivity extends AppCompatActivity
 
     public void onDestroy() {
         super.onDestroy();
-
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
     }
@@ -133,7 +130,7 @@ public class MainActivity extends AppCompatActivity
 
         if (ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()) == 1) {
             if (num > 5) {
-                startActivity(new Intent(this, ContentsTableActivity.class));
+                startActivity(new Intent(this, OpeningActivity.class));
             }
             num++;
             Log.e("test", "인식함");

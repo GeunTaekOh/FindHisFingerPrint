@@ -19,7 +19,7 @@ public class PageFragment2 extends Fragment {
     private int mPageNumber;
     private Uri video;
     private static String packageName;
-    VideoView videoView;
+    private VideoView videoView;
 
     public static PageFragment2 create(int pageNumber, String pn) {
         PageFragment2 fragment = new PageFragment2();
@@ -45,13 +45,10 @@ public class PageFragment2 extends Fragment {
             case 0:
                 video = Uri.parse("android.resource://" + packageName + "/" + R.raw.test_mpeg);
                 break;
-
             //sub main activity 에 페이지 개수 수정하기
         }
-
         videoView = ((VideoView) layout.findViewById(R.id.videoView));
         playVideo();
-
         return layout;
     }
 

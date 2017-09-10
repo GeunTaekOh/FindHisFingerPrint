@@ -42,8 +42,6 @@ extern "C" {
         int HighV = 200;
         // s 와 v 는 0~100까지 값으로 나타내는데 이걸 opencv에서는 0~255 값으로 나타내므로 255 * 0.xxx 한 값을 넣어줘야한다.
 
-
-
         //R 값 먼저 확인하고 G 값 확인 후 B 값 확인함
         //아래 싸이트 rgb -> hsv 변환
 //http://www.rapidtables.com/convert/color/rgb-to-hsv.htm
@@ -60,23 +58,18 @@ extern "C" {
         cvtColor(matInput, matTmp, CV_RGB2HSV);
         cvtColor(matTmp, matResult, CV_HSV2RGB);
 
-
-        //inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
         inRange(matTmp, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
         //inRange 함수는 그 범위안에 들어가게되면 0으로 만들어주고 나머지는 1로 만들어 흑백사진을 만든다.
 
-
         //라벨링
         Mat img_labels,stats, centroids;
-        int numOfLables = connectedComponentsWithStats(img_binary, img_labels,
-                                                       stats, centroids, 8,CV_32S);
+        int numOfLables = connectedComponentsWithStats(img_binary, img_labels, stats, centroids, 8,CV_32S);
 
         //영역박스 그리기
         int max = -1, idx=0;
-        for (int j = 1; j < numOfLables; j++) {
+        for (int j = 1; j < numOfLables; j++){
             int area = stats.at<int>(j, CC_STAT_AREA);
-            if ( max < area )
-            {
+            if ( max < area ){
                 max = area;
                 idx = j;
             }
@@ -98,7 +91,6 @@ extern "C" {
 
 //        return 0;
         //   return height * width;
-
 
     }
 }
