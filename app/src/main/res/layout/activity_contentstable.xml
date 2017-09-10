@@ -5,36 +5,42 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <VideoView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/contents_table_video"
             />
-
-        <Button
-            android:id="@+id/first_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="FirstBtn"
-            />
-
-
-        <Button
-            android:id="@+id/second_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="SecondBtn" />
-    </LinearLayout>
+            >
 
 
+            <Button
+                android:id="@+id/first_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="FirstBtn"
+                />
+
+            <Button
+                android:id="@+id/second_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="SecondBtn" />
+
+
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
