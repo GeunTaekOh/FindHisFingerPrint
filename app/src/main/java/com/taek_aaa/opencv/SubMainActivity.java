@@ -54,9 +54,9 @@ public class SubMainActivity extends FragmentActivity {
         @Override
         public int getCount() {
             if (contentsTableIndex == 0) {
-                return 7;
+                return 6;
             } else {
-                return 3;
+                return 1;
             }
             // 총 n개의 page를 보여줍니다.       이 부분은 수동적으로 개수를 넣어줘야함
         }

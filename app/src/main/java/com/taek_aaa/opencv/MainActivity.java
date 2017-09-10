@@ -133,7 +133,6 @@ public class MainActivity extends AppCompatActivity
 
         if (ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()) == 1) {
             if (num > 5) {
-                //startActivity(new Intent(this, SubMainActivity.class));
                 startActivity(new Intent(this, ContentsTableActivity.class));
             }
             num++;

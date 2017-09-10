@@ -21,7 +21,7 @@ extern "C" {
                                                         jlong matAddrInput, jlong matAddrResult, jlong path) {
         Mat binary;
 
-
+// 이 아래는 RGB 값
 //        int LowH = 160;
 //        int HighH = 202;
 //
@@ -33,7 +33,8 @@ extern "C" {
 
         int LowH = 24;
         int HighH = 37;
-        // H 값은 360도로 나타나는대 이걸 opencv 에서는 0~180으로 나타내기 때문에 그 값을 절반 나누어서 입력하기
+        // H 값은 360도로 나타나는대 이걸 opencv 에서는 0~180으로 나타내기 때문에 실제 H 값을 절반 나누어서 입력하기
+
         int LowS = 204;
         int HighS = 220;
 
@@ -44,7 +45,6 @@ extern "C" {
 
 
         //R 값 먼저 확인하고 G 값 확인 후 B 값 확인함
-        // 지금은inRange 에 matResult 를 넣어놔서 rgb로 값을 인식함
         //아래 싸이트 rgb -> hsv 변환
 //http://www.rapidtables.com/convert/color/rgb-to-hsv.htm
 //http://babytiger.tistory.com/entry/opencv%EC%97%90%EC%84%9C-HSV%EC%9D%98-%EA%B0%81-%EC%B1%84%EB%84%90-%EB%B2%94%EC%9C%84
@@ -59,7 +59,6 @@ extern "C" {
 
         cvtColor(matInput, matTmp, CV_RGB2HSV);
         cvtColor(matTmp, matResult, CV_HSV2RGB);
-
 
 
         //inRange(matResult, Scalar(LowH, LowS, LowV), Scalar(HighH, HighS, HighV), img_binary);
@@ -82,7 +81,7 @@ extern "C" {
                 idx = j;
             }
         }
-        ///////테스트겸 지금 일단 액티비티 넘어가는 것은 꺼둠
+
         int left = stats.at<int>(idx, CC_STAT_LEFT);
         int top  = stats.at<int>(idx, CC_STAT_TOP);
         int width = stats.at<int>(idx, CC_STAT_WIDTH);
@@ -92,12 +91,12 @@ extern "C" {
             rectangle(matResult, Point(left, top), Point(left + width, top + height), Scalar(255, 0, 0), 3);
         //차례대로, 영상 Mat, 좌표점1, 좌표점2, 색상, 두께(-1이면 color 색상으로 채운 사각형을 그림), 타입, 시프트연산을 뜻한다.
 
-//        if(height * width < 1 || height * width > 2000000)
-//            return 0;
-//        else
-//            return 1;
+        if(height * width < 1 || height * width > 2000000)
+            return 0;
+        else
+            return 1;
 
-        return 0;
+//        return 0;
         //   return height * width;
 
 
