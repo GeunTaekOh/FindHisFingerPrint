@@ -43,18 +43,18 @@ public class SubMainActivity extends FragmentActivity {
             }
             fragments.put(position, frag);
             if (contentsTableIndex == 0) {
-                return PageFragment.create(position, getPackageName());
-            } else {
                 return PageFragment2.create(position, getPackageName());
+            } else {
+                return PageFragment.create(position, getPackageName());
             }
         }
 
         @Override
         public int getCount() {
             if (contentsTableIndex == 0) {
-                return 6;
-            } else {
                 return 1;
+            } else {
+                return 7;
             }
             // 총 n개의 page를 보여줍니다.       이 부분은 수동적으로 개수를 넣어줘야함
         }

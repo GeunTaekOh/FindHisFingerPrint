@@ -60,6 +60,9 @@ public class PageFragment extends Fragment {
             case 5:
                 video = Uri.parse("android.resource://" + packageName + "/" + R.raw.sample06);
                 break;
+            case 6:
+                video = Uri.parse("android.resource://" + packageName + "/" + R.raw.sample07);
+                break;
 
             //Sub Main activity 에 페이지 개수 수정하기
         }

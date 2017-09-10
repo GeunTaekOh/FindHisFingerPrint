@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +25,7 @@ public class ContentsTableActivity extends AppCompatActivity {
     private long lastTimeBackPressed;           //뒤로가기 버튼을 2번 누르면 종료하기 위해 담은 변수
     private VideoView videoView;
     private Uri video;
+    private Button btn1,btn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,24 +39,42 @@ public class ContentsTableActivity extends AppCompatActivity {
         videoView.setVideoURI(video);
         playVideo();
 
+        btn1 = (Button) findViewById(R.id.first_btn);
+        btn2 = (Button) findViewById(R.id.second_btn);
+        btn1.setBackgroundResource(R.drawable.f_bb);
+        btn2.setBackgroundResource(R.drawable.s_bn);
 
-        Button btn1 = (Button) findViewById(R.id.first_btn);
         intent = new Intent(this, SubMainActivity.class);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(intent);
+                btn1.setBackgroundResource(R.drawable.f_gg);
+                btn2.setBackgroundResource(R.drawable.s_bb);
                 contentsTableIndex = 0;
+                new CountDownTimer(500, 500) {
+                    public void onTick(long millisUntilFinished) {
+                    }
+                    public void onFinish() {
+                        startActivity(intent);
+                    }
+                }.start();
             }
         });
 
-        Button btn2 = (Button) findViewById(R.id.second_btn);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(intent);
+                btn1.setBackgroundResource(R.drawable.f_gb);
+                btn2.setBackgroundResource(R.drawable.s_gb);
                 contentsTableIndex = 1;
+                new CountDownTimer(500, 500) {
+                    public void onTick(long millisUntilFinished) {
+                    }
+                    public void onFinish() {
+                        startActivity(intent);
+                    }
+                }.start();
             }
         });
     }
@@ -67,6 +88,13 @@ public class ContentsTableActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onStart(){
+        super.onStart();
+        btn1.setBackgroundResource(R.drawable.f_bb);
+        btn2.setBackgroundResource(R.drawable.s_bn);
+    }
+
 
     @Override
     public void onBackPressed() {       //뒤로가기 2번 1.5초 안에 클릭시 종료
@@ -74,6 +102,8 @@ public class ContentsTableActivity extends AppCompatActivity {
             moveTaskToBack(true);
             finish();       //현재 보이는 페이지 종료
             android.os.Process.killProcess(android.os.Process.myPid());     //어플 완전 종료
+            ActivityCompat.finishAffinity(this);
+            System.exit(0);
             return;
         }
         Toast.makeText(ContentsTableActivity.this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show();
