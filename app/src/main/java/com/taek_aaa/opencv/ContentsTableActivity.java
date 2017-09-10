@@ -35,14 +35,14 @@ public class ContentsTableActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         videoView = (VideoView)findViewById(R.id.contents_table_video);
-        video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.menu_background);
+        video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.menu_backgroud);
         videoView.setVideoURI(video);
         playVideo();
 
         btn1 = (Button) findViewById(R.id.first_btn);
         btn2 = (Button) findViewById(R.id.second_btn);
         btn1.setBackgroundResource(R.drawable.f_bb);
-        btn2.setBackgroundResource(R.drawable.s_bn);
+        btn2.setBackgroundResource(R.drawable.s_b);
 
         intent = new Intent(this, SubMainActivity.class);
 
@@ -50,7 +50,7 @@ public class ContentsTableActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btn1.setBackgroundResource(R.drawable.f_gg);
-                btn2.setBackgroundResource(R.drawable.s_bb);
+                btn2.setBackgroundResource(R.drawable.s_b);
                 contentsTableIndex = 0;
                 new CountDownTimer(500, 500) {
                     public void onTick(long millisUntilFinished) {
@@ -66,7 +66,7 @@ public class ContentsTableActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btn1.setBackgroundResource(R.drawable.f_gb);
-                btn2.setBackgroundResource(R.drawable.s_gb);
+                btn2.setBackgroundResource(R.drawable.s_g);
                 contentsTableIndex = 1;
                 new CountDownTimer(500, 500) {
                     public void onTick(long millisUntilFinished) {
@@ -92,7 +92,7 @@ public class ContentsTableActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         btn1.setBackgroundResource(R.drawable.f_bb);
-        btn2.setBackgroundResource(R.drawable.s_bn);
+        btn2.setBackgroundResource(R.drawable.s_b);
     }
 
 
