@@ -31,16 +31,25 @@ extern "C" {
 //        int LowV = 20;
 //        int HighV = 50;
 
-        int LowH = 24;
-        int HighH = 37;
-        // H 값은 360도로 나타나는대 이걸 opencv 에서는 0~180으로 나타내기 때문에 실제 H 값을 절반 나누어서 입력하기
+//        int LowH = 24;
+//        int HighH = 37;
+//        // H 값은 360도로 나타나는대 이걸 opencv 에서는 0~180으로 나타내기 때문에 실제 H 값을 절반 나누어서 입력하기
+//
+//        int LowS = 204;
+//        int HighS = 220;
+//
+//        int LowV = 150;
+//        int HighV = 200;
+        // s 와 v 는 0~100까지 값으로 나타내는데 이걸 opencv에서는 0~255 값으로 나타내므로 255 * 0.xxx 한 값을 넣어줘야한다.
+        int LowH = 30;
+        int HighH = 42;
 
-        int LowS = 204;
+        int LowS = 193;
         int HighS = 220;
 
         int LowV = 150;
-        int HighV = 200;
-        // s 와 v 는 0~100까지 값으로 나타내는데 이걸 opencv에서는 0~255 값으로 나타내므로 255 * 0.xxx 한 값을 넣어줘야한다.
+        int HighV = 220;
+
 
         //R 값 먼저 확인하고 G 값 확인 후 B 값 확인함
         //아래 싸이트 rgb -> hsv 변환

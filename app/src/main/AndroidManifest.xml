@@ -37,6 +37,7 @@
         <activity android:name=".SubMainActivity"/>
         <activity android:name=".ContentsTableActivity"  android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".OpeningActivity"  android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".TeaserActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

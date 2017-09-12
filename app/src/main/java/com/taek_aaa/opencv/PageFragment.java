@@ -89,7 +89,7 @@ public class PageFragment extends Fragment {
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
+                mp.setLooping(false);
                 videoView.start();
             }
         });
