@@ -99,11 +99,7 @@ public class ContentsTableActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {       //뒤로가기 2번 1.5초 안에 클릭시 종료
         if (System.currentTimeMillis() - lastTimeBackPressed < 1500) {
-            moveTaskToBack(true);
-            finish();       //현재 보이는 페이지 종료
-            android.os.Process.killProcess(android.os.Process.myPid());     //어플 완전 종료
             ActivityCompat.finishAffinity(this);
-            System.exit(0);
             return;
         }
         Toast.makeText(ContentsTableActivity.this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show();
