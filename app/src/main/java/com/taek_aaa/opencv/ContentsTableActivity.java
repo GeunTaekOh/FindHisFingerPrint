@@ -21,11 +21,11 @@ import android.widget.VideoView;
 public class ContentsTableActivity extends AppCompatActivity {
 
     public static int contentsTableIndex = 0;
-    private Intent intent;
+    private Intent intent, thanksIntent;
     private long lastTimeBackPressed;           //뒤로가기 버튼을 2번 누르면 종료하기 위해 담은 변수
     private VideoView videoView;
     private Uri video;
-    private Button btn1,btn2;
+    private Button btn1,btn2,btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,13 @@ public class ContentsTableActivity extends AppCompatActivity {
 
         btn1 = (Button) findViewById(R.id.first_btn);
         btn2 = (Button) findViewById(R.id.second_btn);
+        btn3 = (Button) findViewById(R.id.finger_print_btn);
         btn1.setBackgroundResource(R.drawable.f_bb);
         btn2.setBackgroundResource(R.drawable.s_b);
+        btn3.setBackgroundResource(R.drawable.fingerprint);
 
         intent = new Intent(this, SubMainActivity.class);
+        thanksIntent = new Intent(this, ThanksActivity.class);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,13 @@ public class ContentsTableActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }.start();
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(thanksIntent);
             }
         });
     }
