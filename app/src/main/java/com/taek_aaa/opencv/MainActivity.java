@@ -129,7 +129,9 @@ public class MainActivity extends AppCompatActivity
         if (ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()) == 1) {
             if (num > 5) {
                 num=0;
-                startActivity(new Intent(this, TeaserActivity.class));
+                //startActivity(new Intent(this, TeaserActivity.class));
+                startActivity(new Intent(this, OpeningActivity.class));
+
             }
             num++;
             Log.e("test", "인식함");

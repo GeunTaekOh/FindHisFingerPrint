@@ -19,14 +19,14 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="25dp"
             android:orientation="vertical">
 
 
             <Button
                 android:id="@+id/first_btn"
                 android:layout_width="370dp"
-                android:layout_height="100dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:layout_margin="3dp"
                 />
@@ -34,13 +34,12 @@
             <Button
                 android:id="@+id/second_btn"
                 android:layout_width="370dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp" />
 
-
-
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,10 +49,12 @@
             android:layout_marginBottom="30dp"
             >
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="10dp"
                 android:id="@+id/finger_print_btn"
                 android:layout_gravity="center"
+                android:layout_marginBottom="13dp"
                 />
         </LinearLayout>
     </FrameLayout>
