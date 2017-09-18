@@ -92,15 +92,11 @@ public class ContentsTableActivity extends AppCompatActivity {
             }
         });
 
-
         videoView.setOnTouchListener(new OnSwipeTouchListener(ContentsTableActivity.this) {
             public void onSwipeRight() {
                 startActivity(teaserIntent);
             }
         });
-
-
-
     }
 
     private void playVideo() {
@@ -130,7 +126,6 @@ public class ContentsTableActivity extends AppCompatActivity {
         lastTimeBackPressed = System.currentTimeMillis();
     }
     public class OnSwipeTouchListener implements View.OnTouchListener {
-
         private final GestureDetector gestureDetector;
 
         public OnSwipeTouchListener(Context context) {
