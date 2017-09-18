@@ -1,5 +1,6 @@
 package com.taek_aaa.opencv;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,7 +24,7 @@ import android.widget.VideoView;
 public class ContentsTableActivity extends AppCompatActivity {
 
     public static int contentsTableIndex = 0;
-    private Intent intent, thanksIntent;
+    private Intent intent, thanksIntent, teaserIntent;
     private long lastTimeBackPressed;           //뒤로가기 버튼을 2번 누르면 종료하기 위해 담은 변수
     private VideoView videoView;
     private Uri video;
@@ -48,6 +51,7 @@ public class ContentsTableActivity extends AppCompatActivity {
 
         intent = new Intent(this, SubMainActivity.class);
         thanksIntent = new Intent(this, ThanksActivity.class);
+        teaserIntent = new Intent(this, TeaserActivity.class);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +91,16 @@ public class ContentsTableActivity extends AppCompatActivity {
                 startActivity(thanksIntent);
             }
         });
+
+
+        videoView.setOnTouchListener(new OnSwipeTouchListener(ContentsTableActivity.this) {
+            public void onSwipeRight() {
+                startActivity(teaserIntent);
+            }
+        });
+
+
+
     }
 
     private void playVideo() {
@@ -115,4 +129,48 @@ public class ContentsTableActivity extends AppCompatActivity {
         Toast.makeText(ContentsTableActivity.this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show();
         lastTimeBackPressed = System.currentTimeMillis();
     }
+    public class OnSwipeTouchListener implements View.OnTouchListener {
+
+        private final GestureDetector gestureDetector;
+
+        public OnSwipeTouchListener(Context context) {
+            gestureDetector = new GestureDetector(context, new GestureListener());
+        }
+
+        public void onSwipeLeft() {
+        }
+
+        public void onSwipeRight() {
+        }
+
+        public boolean onTouch(View v, MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
+        }
+
+        private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
+
+            private static final int SWIPE_DISTANCE_THRESHOLD = 100;
+            private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                float distanceX = e2.getX() - e1.getX();
+                float distanceY = e2.getY() - e1.getY();
+                if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > SWIPE_DISTANCE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (distanceX > 0)
+                        onSwipeRight();
+                    else
+                        onSwipeLeft();
+                    return true;
+                }
+                return false;
+            }
+        }
+    }
+
 }
