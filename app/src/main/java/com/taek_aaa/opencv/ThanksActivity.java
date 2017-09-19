@@ -22,11 +22,7 @@ public class ThanksActivity extends AppCompatActivity {
 
         imgView = (ImageView) findViewById(R.id.thanks_img_view);
 
-
-
-
     }
-
 }
 
 

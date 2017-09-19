@@ -22,8 +22,7 @@ import org.opencv.core.Mat;
 
 
 
-public class MainActivity extends AppCompatActivity
-        implements CameraBridgeViewBase.CvCameraViewListener2 {
+public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
     private static final String TAG = "opencv";
     private CameraBridgeViewBase mOpenCvCameraView;     //카메라를찍는화면의뷰를가져옴
@@ -69,7 +68,6 @@ public class MainActivity extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //퍼미션 상태 확인
             if (!hasPermissions(PERMISSIONS)) {
-
                 //퍼미션 허가 안되어있다면 사용자에게 요청
                 requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }
@@ -129,8 +127,8 @@ public class MainActivity extends AppCompatActivity
         if (ConvertRGBtoGray(matInput.getNativeObjAddr(), matResult.getNativeObjAddr()) == 1) {
             if (num > 5) {
                 num=0;
-                //startActivity(new Intent(this, TeaserActivity.class));
-                startActivity(new Intent(this, OpeningActivity.class));
+                startActivity(new Intent(this, TeaserActivity.class));
+             //   startActivity(new Intent(this, OpeningActivity.class));
 
             }
             num++;
