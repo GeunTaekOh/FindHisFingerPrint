@@ -46,4 +46,11 @@ w매거진
 -	메인 화면에서 2가지 메뉴를 선택하여 각각의 영상을 세로 뷰페이저로 출력
 
 ![Alt text](https://github.com/GeunTeakOh/OpenCV/blob/master/app/src/main/res/drawable/1.jpg)
+![Alt text](https://github.com/GeunTeakOh/OpenCV/blob/master/app/src/main/res/drawable/2.jpg)
+![Alt text](https://github.com/GeunTeakOh/OpenCV/blob/master/app/src/main/res/drawable/3.jpg)
+![Alt text](https://github.com/GeunTeakOh/OpenCV/blob/master/app/src/main/res/drawable/4.jpg)
+![Alt text](https://github.com/GeunTeakOh/OpenCV/blob/master/app/src/main/res/drawable/5.jpg)
+![Alt text](https://github.com/GeunTeakOh/OpenCV/blob/master/app/src/main/res/drawable/6.jpg)
+![Alt text](https://github.com/GeunTeakOh/OpenCV/blob/master/app/src/main/res/drawable/7.jpg)
+
 
