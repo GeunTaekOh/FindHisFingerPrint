@@ -45,5 +45,5 @@ w매거진
 -	OpenCv로 인식을 하면 메인 화면으로 이동
 -	메인 화면에서 2가지 메뉴를 선택하여 각각의 영상을 세로 뷰페이저로 출력
 
-![Alt text](/Users/ohgeuntaek/Desktop/공부/외주/올리브영 미솔 외주/근택1.jpg)
+![Alt text](/Users/ohgeuntaek/Desktop/githubmd/1.jpg)
 
