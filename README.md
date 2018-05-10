@@ -1,37 +1,24 @@
 # Android 외주
-국민대학교 영상디자인학과 학생의 졸업 전시회 작품 협업  
-
----
+> 국민대학교 영상디자인학과 학생의 졸업 전시회 작품 협업  
 
 ## 목표
-올리브영에서 진행하는 일상적이고 자연스러운 남성을 타겟으로 한 데일리 메이크업에 관한 디지털 매거진 어플리케이션  
-
----
+> 올리브영에서 진행하는 일상적이고 자연스러운 남성을 타겟으로 한 데일리 메이크업에 관한 디지털 매거진 어플리케이션  
 
 ## 타겟 어플리케이션
-w매거진  
-
----
+> w매거진  
 
 ## 핸드폰 기종
-갤럭시 s7(안드로이드)
-
----
+> 갤럭시 s7(안드로이드)
 
 ## 개발환경
-안드로이드 스튜디오
-
----
+> 안드로이드 스튜디오
 
 ## 마감기한
-9월 첫 주
+> 9월 첫 주
 
----
 
 ## 전시기간
-9월 21 ~ 9월 26일
-
----
+> 9월 21 ~ 9월 26일
 
 ## 요구사항
 -	영상은 소리와 함께 출력
@@ -60,23 +47,23 @@ w매거진
 
 ---
 
-![Alt text](/res/readme_img1.png)  
-![Alt text](/res/readme_img2.png)  
-![Alt text](/res/readme_img3.png)  
-![Alt text](/res/readme_img4.png)  
-![Alt text](/res/readme_img5.png)  
-![Alt text](/res/readme_img6.png)  
-![Alt text](/res/readme_img7.png)  
+![Alt text](/res/readme_img1.jpg)  
+![Alt text](/res/readme_img2.jpg)  
+![Alt text](/res/readme_img3.jpg)  
+![Alt text](/res/readme_img4.jpg)  
+![Alt text](/res/readme_img5.jpg)  
+![Alt text](/res/readme_img6.jpg)  
+![Alt text](/res/readme_img7.jpg)  
 
 ---
 ![Alt text](/res/readme1.png)  
-> 메인 화면
+메인 화면
 
 ![Alt text](/res/readme1.png)  
-> 클릭시 메인 화면  
+클릭시 메인 화면  
 
 ![Alt text](/res/readme1.png)  
-> 영상 출력 화면  
+영상 출력 화면  
 
 ![Alt text](/res/readme1.png)  
-> 영상 출력 화면  
+영상 출력 화면  
