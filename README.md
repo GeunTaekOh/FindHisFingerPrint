@@ -57,13 +57,13 @@
 
 ---
 ![Alt text](/res/readme1.png)  
-메인 화면
+*  메인 화면
 
-![Alt text](/res/readme1.png)  
-클릭시 메인 화면  
+![Alt text](/res/readme2.png)  
+* 클릭시 메인 화면  
 
-![Alt text](/res/readme1.png)  
-영상 출력 화면  
+![Alt text](/res/readme3.png)  
+*  영상 출력 화면  
 
-![Alt text](/res/readme1.png)  
-영상 출력 화면  
+![Alt text](/res/readme4.png)  
+*  영상 출력 화면  
